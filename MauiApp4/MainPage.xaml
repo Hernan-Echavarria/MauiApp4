@@ -1,0 +1,71 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp"
+             x:Class="MauiApp.MainPage"
+             Title="Estado del Vehículo">
+    <ContentPage.Content>
+        <StackLayout Padding="10" BackgroundColor="#F9F9F9">
+
+            <!-- Barra de búsqueda -->
+            <SearchBar Placeholder="Placa o número de cita"
+                       BackgroundColor="#FFF"
+                       Margin="0,0,0,10"/>
+
+            <!-- Botones de categorías -->
+            <HorizontalStackLayout Spacing="10" Margin="0,0,0,20">
+                <Button Text="Preventivo" BackgroundColor="#FFA726" TextColor="White" />
+                <Button Text="Correctivo" BackgroundColor="#FFA726" TextColor="White" />
+                <Button Text="Llantas" BackgroundColor="#FFA726" TextColor="White" />
+                <Button Text="Diagnóstico" BackgroundColor="#FFA726" TextColor="White" />
+            </HorizontalStackLayout>
+
+            <!-- Lista de vehículos -->
+            <CollectionView ItemsSource="{Binding Vehiculos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#FFF" CornerRadius="10" Padding="10" Margin="0,0,0,10">
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
+                                <!-- Imagen del vehículo -->
+                                <Image Grid.RowSpan="3"
+                                       Source="{Binding Imagen}"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       Aspect="AspectFill" />
+
+                                <!-- Información del vehículo -->
+                                <Label Grid.Column="1"
+                                       Text="{Binding Nombre}"
+                                       FontAttributes="Bold"
+                                       FontSize="16" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding Descripcion}"
+                                       FontSize="14"
+                                       TextColor="Gray" />
+
+                                <!-- Estado y precio -->
+                                <Label Grid.Column="2"
+                                       Text="{Binding Estado}"
+                                       TextColor="White"
+                                       BackgroundColor="{Binding EstadoColor}"
+                                       FontAttributes="Bold"
+                                       Padding="5"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                        />
+                                    <Label Grid.Column="2"
+                                       
+                                        Text="{Binding Precio, StringFormat='{}{0:C}'}"
+                                       TextColor="#FFA726"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="End" />
+                                   
+                               
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
